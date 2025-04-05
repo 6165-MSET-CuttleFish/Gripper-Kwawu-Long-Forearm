@@ -7,7 +7,7 @@
 // The ISO thread code is by Trevor Moseley
 
 // Preview Each Part
-part = "Cuff"; // [ Cuff:Cuff, Arm1:Arm1, Arm2:Arm2, Arm3:Arm3, Arm4:Arm4, Palm:Palm,PalmTop:PalmTop, PalmBolt:PalmBolt, WristArmAttach:WristArmAttach, WristBolt:WristBolt, ElbowBolt:ElbowBolt, Tensioner:Tensioner, IndexFingerEnd:IndexFingerEnd, IndexFingerPhalanx:IndexFingerPhalanx, MiddleFingerEnd:MiddleFingerEnd, MiddleFingerPhalanx:MiddleFingerPhalanx, PinkyFingerEnd:PinkyFingerEnd, PinkyFingerPhalanx:PinkyFingerPhalanx, RingFingerEnd:RingFingerEnd, RingFingerPhalanx:RingFingerPhalanx, ThumbEnd:ThumbEnd, ThumbPhalanx:ThumbPhalanx, WhippleTreePrimary:WhippleTreePrimary, WhippleTreeSecondary:WhippleTreeSecondary, LatchSlider:LatchSlider, LatchPin:LatchPin, LatchTeeth:LatchTeeth, PencilHolderCover:PencilHolderCover, WristCompressionBushing:WristCompressionBushing, Hinge4Knuckles:Hinge4Knuckles, HingeIndexFinger:HingeIndexFinger, HingeMiddleFinger:HingeMiddleFinger, HingePinkyFinger:HingePinkyFinger, HingeRingFinger:HingeRingFinger, HingeThumb:HingeThumb, HingeThumbKnuckle:HingeThumbKnuckle, LatchHinge:LatchHinge, Thermoform1:Thermoform1, Thermoform2:Thermoform2, Thermoform3:Thermoform3, Cover1:Cover1, Cover2:Cover2, Cover3:Cover3, Cover4:Cover4 ]
+part = "Cuff"; // [ Cuff:Cuff, Arm1:Arm1, Arm2:Arm2, Arm3:Arm3, Arm4:Arm4, ElbowBolt:ElbowBolt, WhippleTreePrimary:WhippleTreePrimary, WhippleTreeSecondary:WhippleTreeSecondary, WristCompressionBushing:WristCompressionBushing, Thermoform1:Thermoform1, Thermoform2:Thermoform2, Thermoform3:Thermoform3, Cover1:Cover1, Cover2:Cover2, Cover3:Cover3, Cover4:Cover4, GripperHand: GripperHand, ThumbMoldOuter:ThumbMoldOuter, ThumbMoldInner:ThumbMoldInner, ThumbReg:ThumbReg]
 
 // Choose Left or Right Hand
 LeftRight = "Left"; // [Left,Right]
@@ -55,6 +55,8 @@ BicepCircumferenceWPadding = ((BicepCircumference/PI) + 2*PaddingThickness)*PI;
 CuffScale = BicepCircumferenceWPadding/294;
 
 WristBoltDia = 25;
+
+ThumbScrewDia = HandScale > 1 ? 4 : 3;
 $fn=30;
 
 print_part();
@@ -391,8 +393,98 @@ module print_part( ) {
     {
         MakeWristCompressionBushing();
     }
+    if (part == "GripperHand" || part == "All") {
+            translate([400, 800, 0])
+            translate([30, 0, 0])
+            if (LeftRight == "Left") {
+                mirror([1,0,0])     MakeGripper();
+            } else {
+                MakeGripper();
+            }
+        } 
+        if (part == "ThumbMoldOuter" || part == "All") {
+            translate([800, 800, 0])
+            translate([120, -100,0])
+            if (LeftRight == "Left") {
+                mirror([1,0,0])     MakeThumbMoldOuter();
+            } else {
+                MakeThumbMoldOuter();
+            }
+        } 
+        if (part == "ThumbMoldInner" || part == "All") {
+            translate([-800, 400, 0])
+            translate([200, -200, 0])
+            if (LeftRight == "Left") {
+                mirror([1,0,0])     MakeThumbMoldInner();
+            } else {
+                MakeThumbMoldInner();
+            }
+        } 
+        if (part == "ThumbReg") {
+            translate([-800, -800, 0])
+            if (LeftRight == "Left") {
+                mirror([1,0,0])     MakeThumbReg();
+            } else {
+                MakeThumbReg();
+            }
+        }
+}
+
+module MakeGripper() {  
+    difference(){
+        union(){
+            // Load hand model
+            Gripper();
+            
+            // Fill in original bolt mount
+            translate([27.6* HandScale, -3.5 * HandScale, 0])
+            cylinder(h = 18 * HandScale, d = 25 * HandScale, $fn = 30);
+            translate([23* HandScale, -2 * HandScale, 0])
+            cylinder(h = 30 * HandScale, d = 25 * HandScale, $fn = 30);
+            
+            // Fill in Letter
+            translate([9* HandScale, -4 * HandScale, 0])
+            cylinder(h = 4 * HandScale, d = 10 * HandScale, $fn = 30);
+            // Fix screw hole for thumb
+            rotate([0,90,0])
+            translate([-32 * HandScale, -15.5 * HandScale, 9.35 * HandScale])
+            {
+                difference() {
+                    cylinder(h = 50 * HandScale, d = 5 * HandScale, $fn = 30);
+                    cylinder(h = 50 * HandScale, d = (ThumbScrewDia-0.35) * HandScale, $fn = 30);
+                }
+            }
+        }
+        
+        rotate([0,90,0]) {
+            // Hole for screw head
+            translate([-32 * HandScale, -15.5 * HandScale, 58 * HandScale])
+            cylinder(h = 6 * HandScale, d = 8.5 * HandScale, $fn = 30);
+            
+            // Fix hole for thumb
+            translate([-32 * HandScale, -15.5 * HandScale, 38.44 * HandScale])
+            cylinder(h = 14.49 * HandScale, d = 6 * HandScale, $fn = 30);
+        }
+    }
+    
+        rodWidth = 20 * ForeArmCircumferenceScale;
+        // Add rod
+        translate([(28.7209 + 0.9)* HandScale, (-5.9592 + 1.77 + .54)* HandScale, -10 * ArmScale])
+        rotate([0,0,0])
+        cube([rodWidth, rodWidth, 20 * ArmScale], center=true);
+    
     
 }
+module MakeThumbMoldOuter() {
+    ThumbOuter();
+}
+module MakeThumbMoldInner() {
+    ThumbInner();
+}
+module MakeThumbReg() {
+    ThumbReg();
+}
+
 
 module MakeWristCompressionBushing() {
     
@@ -1155,3 +1247,21 @@ module Cover3of4() {scale([ForeArmCircumferenceScale,ArmScale,ArmScale]) import(
 
 module Cover4of4() {scale([ForeArmCircumferenceScale,ArmScale,ArmScale]) import("o_Cover4of4.stl", convexity=3); }
 
+module Gripper() {
+    rotate([90, 0, 0]) 
+    translate([26.85 * HandScale, -0.15 * HandScale, 6.8 * HandScale])
+    scale(HandScale*0.8608364113) 
+    import("o_Gripper.stl", convexity=3);
+}
+module ThumbOuter() { 
+    scale(HandScale*0.8658428987) 
+    import("o_ThumbOuter.stl", convexity=3);
+}
+module ThumbInner() { 
+    scale(HandScale*0.8658428987) 
+    import("o_ThumbInner.stl", convexity=3);
+}
+module ThumbReg() { 
+    scale(HandScale*0.8324481754) 
+    import("o_ThumbReg.stl", convexity=3);
+}
