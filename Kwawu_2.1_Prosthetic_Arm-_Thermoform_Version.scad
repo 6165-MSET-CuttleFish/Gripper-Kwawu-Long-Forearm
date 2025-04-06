@@ -436,6 +436,7 @@ module MakeGripper() {
             // Load hand model
             Gripper();
             
+            
             // Fill in original bolt mount
             translate([27.6* HandScale, -3.5 * HandScale, 0])
             cylinder(h = 18 * HandScale, d = 25 * HandScale, $fn = 30);
@@ -467,11 +468,10 @@ module MakeGripper() {
         }
     }
     
-        rodWidth = 20 * ForeArmCircumferenceScale;
-        // Add rod
-        translate([(28.7209 + 0.9)* HandScale, (-5.9592 + 1.77 + .54)* HandScale, -10 * ArmScale])
-        rotate([0,0,0])
-        cube([rodWidth, rodWidth, 20 * ArmScale], center=true);
+        
+        translate([(92)* HandScale, (-8)* HandScale, 0])
+        rotate([0,90,180])
+        GripperAttach();
     
     
 }
@@ -1248,10 +1248,16 @@ module Cover3of4() {scale([ForeArmCircumferenceScale,ArmScale,ArmScale]) import(
 module Cover4of4() {scale([ForeArmCircumferenceScale,ArmScale,ArmScale]) import("o_Cover4of4.stl", convexity=3); }
 
 module Gripper() {
-    rotate([90, 0, 0]) 
-    translate([26.85 * HandScale, -0.15 * HandScale, 6.8 * HandScale])
-    scale(HandScale*0.8608364113) 
+    rotate([0, 90, 0]) 
+    translate([-65 * HandScale, 0, 0])
+    scale([HandScale, HandScale, HandScale]) 
     import("o_Gripper.stl", convexity=3);
+}
+module GripperAttach() {
+    rotate([0, 90, 0]) 
+    translate([-65 * HandScale, 0, 0])
+    scale(HandScale * 0.8608364113) 
+    import("o_GripperAttach.stl", convexity=3);
 }
 module ThumbOuter() { 
     scale(HandScale*0.8658428987) 
