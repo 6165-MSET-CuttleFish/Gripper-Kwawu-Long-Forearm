@@ -25,8 +25,6 @@ PaddingThickness = 2; //[0: 10]
 ArmPieces = 2; //[1, 2, 4]
 // How many pieces to divide the cover into 
 CoverPieces = 2; //[1, 2, 4]
-// ISO metric bolt holding palm together (mm) 
-PalmBoltDiameter = 6;//[4, 6, 8]
 // Diameter of pin holding cover on (mm)
 CoverPinDiameter = 8;//[0, 4, 6, 8, 10]
 // ISO metric bolt holding cuff and arm together (mm)
@@ -35,8 +33,6 @@ ElbowBoltDiameter = 8; //[4, 6, 8, 10, 12, 14]
 TensionerBoltDiameter = 3; //[2, 3, 4]
 // Include Grip Latch
 GripLatch = "Yes"; // [Yes,No]
-// Include Pencil Holder
-PencilHolder = "No"; // [Yes,No]
 
 /* [Hidden] */
 
@@ -69,10 +65,6 @@ module print_part( ) {
         make_bolt(ElbowBoltDiameter, ArmScale * 6 + CuffScale * 10, ElbowBoltDiameter/2, ElbowBoltDiameter *3);
     }
     
-    if (part == "Tensioner") {
-        MakeTensioner();
-    }
-    
     
     if (part == "Cuff") {
         if (LeftRight == "Left") {
@@ -80,14 +72,6 @@ module print_part( ) {
         } else {
             MakeCuff();
         }
-    }
-    
-    if(part == "WristArmAttach") { 
-        if (LeftRight == "Left") {
-            mirror([1,0,0]) makeWristArmAttach();
-        } else {
-           makeWristArmAttach();
-        } 
     }
     
     if (part == "Arm1") {
@@ -217,102 +201,6 @@ module print_part( ) {
         }
     } 
     
-    if (part == "Palm") {
-        if (LeftRight == "Left") {
-            mirror([1,0,0]) MakePalm();
-        } else {
-            MakePalm();
-        }
-    } 
-    
-    if (part == "PalmTop") {
-        if (LeftRight == "Left") {
-            mirror([1,0,0]) MakePalmTop();
-        } else {
-            MakePalmTop();
-        }
-    }
-    
-    if(part == "IndexFingerEnd") {  
-        if (LeftRight == "Left") {
-            mirror([1,0,0]) IndexFingerEnd();
-           } else {
-            IndexFingerEnd();
-        }
-    }
-    
-    if(part == "IndexFingerPhalanx") { 
-         if (LeftRight == "Left") {
-            mirror([1,0,0]) IndexFingerPhalanx();
-           } else {
-            IndexFingerPhalanx();
-        }
-    }
-            
-    if(part == "MiddleFingerEnd") { 
-         if (LeftRight == "Left") {
-            mirror([1,0,0]) MiddleFingerEnd();
-           } else {
-            MiddleFingerEnd();
-        }
-    }
-                
-    if(part == "MiddleFingerPhalanx") { 
-         if (LeftRight == "Left") {
-            mirror([1,0,0]) MiddleFingerPhalanx();
-           } else {
-            MiddleFingerPhalanx();
-        }
-    }
-                    
-    if(part == "PinkyFingerEnd") { 
-         if (LeftRight == "Left") {
-            mirror([1,0,0]) PinkyFingerEnd();
-           } else {
-            PinkyFingerEnd();
-        }
-    }
-    
-    if(part == "PinkyFingerPhalanx") { 
-         if (LeftRight == "Left") {
-            mirror([1,0,0]) PinkyFingerPhalanx();
-           } else {
-            PinkyFingerPhalanx();
-        }
-    }
-    
-    if(part == "RingFingerEnd") { 
-         if (LeftRight == "Left") {
-            mirror([1,0,0]) RingFingerEnd();
-           } else {
-            RingFingerEnd();
-        }
-    }
-    
-    if(part == "RingFingerPhalanx") { 
-         if (LeftRight == "Left") {
-            mirror([1,0,0]) RingFingerPhalanx();
-           } else {
-            RingFingerPhalanx();
-        }
-    }
-    
-    if(part == "ThumbEnd") { 
-         if (LeftRight == "Left") {
-            mirror([1,0,0]) ThumbEnd();
-           } else {
-            ThumbEnd();
-        }
-    }
-    
-    if(part == "ThumbPhalanx") { 
-         if (LeftRight == "Left") {
-            mirror([1,0,0]) ThumbPhalanx();
-           } else {
-            ThumbPhalanx();
-        }
-    }
-    
     if(part == "WhippleTreePrimary") { 
          if (LeftRight == "Left") {
             mirror([1,0,0]) WhippleTreePrimary();
@@ -359,34 +247,11 @@ module print_part( ) {
         }
     }
     
-    if(part == "PalmBolt") { make_bolt(PalmBoltDiameter, HandScale * 23, PalmBoltDiameter, PalmBoltDiameter  + PalmBoltDiameter/2); }
-    
         
     if(part == "WristBolt") { 
         // rotate for better print orientation
         rotate([0,90,0]) 
         MakeWristBolt();
-    }
-    
-    if(part == "Hinge4Knuckles") { scale([HandScale,HandScale,HandScale]) cube([20, 2.5, 6.25]); }
-    
-    if(part == "HingeIndexFinger") { scale([HandScale,HandScale,HandScale]) cube([20, 2.5, 6.25]); }
-    
-    if(part == "HingeMiddleFinger") { scale([HandScale,HandScale,HandScale]) cube([18, 2.5, 6.25]); }
-    
-    if(part == "HingePinkyFinger") {  scale([HandScale,HandScale,HandScale]) cube([15.5, 2.5, 6.25]); }
-    
-    if(part == "HingeRingFinger") { scale([HandScale,HandScale,HandScale]) cube([18, 2.5, 6.25]); }
-    
-    if(part == "HingeThumb") { scale([HandScale,HandScale,HandScale]) cube([21, 2.5, 6.25]); }
-    
-    if(part == "HingeThumbKnuckle") { scale([HandScale,HandScale,HandScale]) cube([31, 2.5, 6.25]); }
-    
-    if(part == "LatchHinge") { scale([ArmScale,ArmScale,ArmScale]) cube([12, 2.5, 6.25]); }
-    
-    if(part == "PencilHolderCover")
-    {
-        PencilHolderCover();
     }
     
      if(part == "WristCompressionBushing")
@@ -516,38 +381,6 @@ module MakeWristCompressionBushing() {
         translate([0, 0, 0.3])cylinder(d=WristDiameter + 1.5, h = 0.6, center=true, $fn=200);
         translate([0, 0, 0.25])cylinder(d=25.5, h = 1.0, center=true, $fn=200);
     }
-    
-}
-
-module PencilHolderCover() {
-    
-    ShortestPencilCover = 27*HandScale;
-    
-    cube([ShortestPencilCover + PencilCoverAddedLength, 1.5*HandScale, 12*HandScale]);
-    
-    translate([0, -0.25 * HandScale, 6 * HandScale]) cylinder(d=3.5*HandScale, h = 12*HandScale, center=true, $fn=30);
-    
-    translate([ShortestPencilCover + PencilCoverAddedLength, -0.25 * HandScale, 6 * HandScale]) cylinder(d=3.5*HandScale, h = 12*HandScale, center=true, $fn=30);
-    }
-
-module MakeTensioner() {
-    
-    //rotate for better print orientation
-rotate([-90,0,0]) 
-    
-    difference() {
-        Tensioner();
-        
-        //Cut a hole for tensioner bolts
-        translate([CuffScale  * 122.79, CuffScale  * -108.574, CuffScale  * 4.5]) rotate([0,90,0])  cylinder(d=TensionerBoltDiameter + 0.5, h = CuffScale  * 60, center=true, $fn=30);
-        
-        //Cut a hole for encapsulated bolt
-        translate([CuffScale  * 122.79 - 3*TensionerBoltDiameter, CuffScale  * -108.574 - 3*TensionerBoltDiameter/2, CuffScale  * 4.5]) rotate([90,0,90]) cube([TensionerBoltDiameter * 4, TensionerBoltDiameter * 1.82, TensionerBoltDiameter], center = true);
-        
-        translate([CuffScale  * 122.79 - 3*TensionerBoltDiameter, CuffScale  * -108.574, CuffScale  * 4.5]) rotate([90,0,90])  cylinder(d=TensionerBoltDiameter * 2.1, h = TensionerBoltDiameter, center=true, $fn=6);
-    }
-    
-    
     
 }
 
@@ -753,129 +586,6 @@ if(CoverPieces !=1)
     }
 }
     
-}
-
-module makeWristArmAttach(){
-     difference(){
-        WristArmAttach();
-
-        // cut large hole for wrist bolt 
-        // the -0.05 on bolt diamter is to make sure threads attach to walls
-        translate([2.513 * HandScale, 14.753 * HandScale, -(21.5* ArmScale) + (26* ArmScale)/2 ]) 
-        cylinder(d = WristBoltDia - 0.05, h = 60.00 * HandScale + 50 * ArmScale, center=true, $fn=30);
-/*        
-          //cut a slot for the compression ring 
-        translate([2.513 * HandScale, 14.753 * HandScale, -(22.5 * HandScale) -3 ]) 
-        cylinder(d = WristBoltDia+8, h = 4, center=false, $fn=30);
-*/
-    }
-    
-    difference() {
-            
-         //Add inner threads for wrist bolt holder
-        translate([2.513 * HandScale, 14.753 * HandScale, -(20 * HandScale + 40 * HandScale) +(-3* HandScale) ]) 
-        thread_in(WristBoltDia, 23 * HandScale + 40 * HandScale);
-  /*        
-        // truncate threads length to hand end
-        translate([2.513 * HandScale - 100, 14.753 * HandScale - 100, -(22.5* HandScale + 3)])
-        cube(200);
-*/
-        
-        translate([2.513 * HandScale - 100, 14.753 * HandScale - 100, -(22.5* HandScale)])
-        cube(200);
-            
-        // truncate threads length to wrist end
-        translate([2.513 * HandScale - 100, 14.753 * HandScale - 100, -200-(37.5* HandScale)+0.5])
-        cube(200);
-    }
-    
-}
-
-module MakePalm() {
-    
-    difference(){
-        Palm();
-        // cut  first hole for bolt to hold palm together
-        translate([HandScale * 12,0, HandScale * 84.35]) rotate([90,0,7]) cylinder(d=PalmBoltDiameter + 0.5,  h=100,center=true, $fn=20);
-        translate([HandScale * 12, 0, HandScale * 84.35]) rotate([90,0,7]) translate([0, 0, -PalmBoltDiameter + 2 * HandScale])  cylinder(d=PalmBoltDiameter  + PalmBoltDiameter/2 + 1, h=100,center=false, $fn=20);
-        
-        // cut  second hole for bolt to hold palm together
-        translate([HandScale * -32.767,0,HandScale * 76.472]) rotate([90,0,7]) cylinder(d=PalmBoltDiameter + 0.5, h=100,center=true, $fn=20);
-        translate([HandScale * -32.767, 0,HandScale * 76.472]) rotate([90,0,7]) translate([0, 0, -PalmBoltDiameter + 2 * HandScale]) cylinder(d=PalmBoltDiameter + PalmBoltDiameter/2 + 1 + 0.5, h=100,center=false, $fn=20);
- 
-  
-        // cut large hole for wrist bolt 
-        // the -0.05 on bolt diamter is to make sure threads attach to walls
-        translate([2.513 * HandScale, 14.753 * HandScale, -(21.5* HandScale) + (-2* HandScale)/2 ]) 
-        cylinder(d = WristBoltDia - 0.05, h = 27.00 * HandScale, center=true, $fn=30);
-        
-        // cut small hole for wrist bolt 
-        translate([2.513 * HandScale, 14.753 * HandScale, -(21.5* HandScale) + (36* HandScale)/2 ]) 
-        cylinder(d = WristBoltDia - 4, h = 36.00 * HandScale, center=true, $fn=30);
-        
-  /*      
-        // champfer wrist base
-        translate([2.513 * HandScale, 14.753 * HandScale, -(21.5 * HandScale) +1]) 
-        cylinder(d = WristBoltDia+6, h = 4.00 , center=true, $fn=30);
-        
-        // champfer wrist base
-        translate([2.513 * HandScale, 14.753 * HandScale, -(23 * HandScale) +2]) 
-        cylinder(d1 = WristBoltDia+6, d2 = WristBoltDia, h = 4.00 , center=true, $fn=30);
-    
-     */   
-        // If the pencil Holder is seelcted then cut it out
-        if(PencilHolder =="Yes")
-        {
-            PencilHolderTool();
-        }
-    }
-    
-
-    difference(){
-        
-        //Add inner threads for wrist bolt holder
-        translate([2.513 * HandScale, 14.753 * HandScale, -(20 * HandScale + 40 * ArmScale) +(-3* HandScale) ])  
-        thread_in(WristBoltDia, 23 * HandScale + 40 * ArmScale);
-        
-        // truncate threads length to inside palm
-        translate([2.513 * HandScale - 100, 14.753 * HandScale - 100, (-6 * HandScale)-0.5])
-        cube(200);
-       
-        /*
-        // truncate threads length to wrist end
-        translate([2.513 * HandScale - 100, 14.753 * HandScale - 100, -197-(21.5* HandScale) ]) 
-        cube(200);
-        */
-        
-        // truncate threads length to wrist end
-        translate([2.513 * HandScale - 100, 14.753 * HandScale - 100, -200-(21.5* HandScale) ]) 
-        cube(200);
-    }
-    
-           
-}
-
-module MakePalmTop() {
-    difference(){
-        PalmTop();
-        
-        //Cut hole for first bolt holder
-        translate([HandScale * 12, 0, HandScale * 84.35]) rotate([90,0,7]) translate([0, 0, -34 * HandScale])  cylinder(d=PalmBoltDiameter, h=100 * HandScale,center=false, $fn=20);
-        
-        //Cut hole for second bolt holder
-        translate([HandScale * -32.767, 0,HandScale * 76.472]) rotate([90,0,7]) translate([0, 0,  -28 * HandScale]) cylinder(d=PalmBoltDiameter , h=100 * HandScale,center=false, $fn=20);
-        
-        
-       
-    }
-   
-     
-    //Add inner threads for first bolt holder
-    translate([HandScale * 12, 0, HandScale * 84.35]) rotate([90,0,7]) translate([0, 0, -35 * HandScale]) thread_in(PalmBoltDiameter, 13 * HandScale);
-    
-    //Add inner threads for second bolt holder
-    translate([HandScale * -32.767, 0,HandScale * 76.472]) rotate([90,0,7]) translate([0, 0,  -29 * HandScale])  thread_in(PalmBoltDiameter, 13 * HandScale);
-   
 }
 
 module MakeThermoform1() {
@@ -1167,34 +877,6 @@ module th_in_pt(rt,p,s,sg,thr,h,sh)
 }
 
 
-module Palm() {scale([HandScale,HandScale,HandScale]) import("o_Palm.stl", convexity=3);}
-
-module WristArmAttach() {scale([HandScale,HandScale,HandScale]) import("o_WristArmAttach.stl", convexity=3);}
-
-module PencilHolderTool() {scale([HandScale,HandScale,HandScale]) import("o_PencilHolderTool.stl", convexity=3);}
-
-module PalmTop() {scale([HandScale,HandScale,HandScale]) import("o_PalmTop.stl", convexity=3);}
-
-module IndexFingerEnd() {scale([HandScale,HandScale,HandScale]) import("o_IndexFingerEnd.stl", convexity=3);}
-
-module IndexFingerPhalanx() {scale([HandScale,HandScale,HandScale]) import("o_IndexFingerPhalanx.stl", convexity=3);}
-
-module MiddleFingerEnd() {scale([HandScale,HandScale,HandScale]) import("o_MiddleFingerEnd.stl", convexity=3);}
-
-module MiddleFingerPhalanx() {scale([HandScale,HandScale,HandScale]) import("o_MiddleFingerPhalanx.stl", convexity=3);}
-
-module PinkyFingerEnd() {scale([HandScale,HandScale,HandScale]) import("o_PinkyFingerEnd.stl", convexity=3);}
-
-module PinkyFingerPhalanx() {scale([HandScale,HandScale,HandScale]) import("o_PinkyFingerPhalanx.stl", convexity=3);}
-
-module RingFingerEnd() {scale([HandScale,HandScale,HandScale]) import("o_RingFingerEnd.stl", convexity=3);}
-
-module RingFingerPhalanx() {scale([HandScale,HandScale,HandScale]) import("o_RingFingerPhalanx.stl", convexity=3);}
-
-module ThumbEnd() {scale([HandScale,HandScale,HandScale]) import("o_ThumbEnd.stl", convexity=3);}
-
-module ThumbPhalanx() {scale([HandScale,HandScale,HandScale]) import("o_ThumbPhalanx.stl", convexity=3);}
-
 module WhippleTreePrimary() {scale([HandScale,HandScale,HandScale]) import("o_WhippleTreePrimary.stl", convexity=3);}
 
 module WhippleTreeSecondary() {scale([HandScale,HandScale,HandScale]) import("o_WhippleTreeSecondary.stl", convexity=3);}
@@ -1215,17 +897,9 @@ module Arm4of4() {scale([ForeArmCircumferenceScale,ArmScale,ArmScale]) import("o
 
 module LatchBase() {scale([ArmScale,ArmScale,ArmScale]) import("o_Latch.stl", convexity=3); }
 
-module LatchSlider() {scale([ArmScale,ArmScale,ArmScale]) import("o_LatchSlider.stl", convexity=3); }
-
-module LatchPin() {scale([ArmScale,ArmScale,ArmScale]) import("o_LatchPin.stl", convexity=3); }
-
-module LatchTeeth() {scale([ArmScale,ArmScale,ArmScale]) import("o_LatchTeeth.stl", convexity=3); }
-
 module LatchHole() {scale([ArmScale,ArmScale,ArmScale]) import("o_LatchHingeHole.stl", convexity=3); }
 
 module Cuff() {scale([CuffScale,CuffScale,CuffScale]) import("o_Cuff.stl", convexity=3); }
-
-module Tensioner() {scale([CuffScale,CuffScale,CuffScale]) import("o_Tensioner.stl", convexity=3); }
 
 module Thermoform1() {scale([ForeArmCircumferenceScale,ForeArmCircumferenceScale,ArmScale]) import("o_Thermoform1.stl", convexity=3); }
 
