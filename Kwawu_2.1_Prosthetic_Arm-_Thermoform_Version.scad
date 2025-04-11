@@ -26,7 +26,7 @@ ArmPieces = 2; //[1, 2, 4]
 // How many pieces to divide the cover into 
 CoverPieces = 2; //[1, 2, 4]
 // Diameter of pin holding cover on (mm)
-CoverPinDiameter = 8;//[0, 4, 6, 8, 10]
+CoverPinDiameter = 0;//[0, 4, 6, 8, 10]
 // ISO metric bolt holding cuff and arm together (mm)
 ElbowBoltDiameter = 8; //[4, 6, 8, 10, 12, 14]
 // ISO metric bolt for adjusting tensioner (mm)
