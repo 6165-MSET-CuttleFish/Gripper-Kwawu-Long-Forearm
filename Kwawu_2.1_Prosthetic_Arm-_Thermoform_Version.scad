@@ -930,7 +930,7 @@ module Gripper() {
 module GripperAttach() {
     rotate([0, 90, 0]) 
     translate([-65 * HandScale, 0, 0])
-    scale(HandScale * 0.8608364113) 
+    scale(HandScale * 1.09803973) 
     import("o_GripperAttach.stl", convexity=3);
 }
 module ThumbOuter() { 
