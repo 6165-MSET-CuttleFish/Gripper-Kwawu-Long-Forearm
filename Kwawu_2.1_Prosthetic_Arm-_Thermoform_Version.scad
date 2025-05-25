@@ -44,7 +44,7 @@ PencilCoverAddedLength = 4.0;
 PI =  3.141592653589793238;
 HandVersion = "V2.2";
 ArmScale = ArmLength/299;
-HandScale = HandWidth / 93;
+HandScale = HandWidth / 71;
 ForearmCircumferenceWPadding = ((ForearmCircumference/PI) + 2*PaddingThickness)*PI;
 ForeArmCircumferenceScale = ForearmCircumferenceWPadding/271;
 BicepCircumferenceWPadding = ((BicepCircumference/PI) + 2*PaddingThickness)*PI;
@@ -484,18 +484,19 @@ module MakeArm(PieceNumber) {
             translate([ForeArmCircumferenceScale  * 47.228 - 2 *HandScale, ArmScale  * 27.319, ArmScale * -30.326 + HandScale * -15 ]) 
             cube([HandScale  * 4, HandScale  * 20, HandScale *7]);
             
-            translate([ForeArmCircumferenceScale  * 47.228 - (40.186125+5) *HandScale , ArmScale  * 27.319,  ArmScale * -30.326 + HandScale * -15]) 
-            cube([HandScale  * 10, HandScale  * 20, HandScale *7]);
+            translate([ForeArmCircumferenceScale  * 47.228 - (38+7) *HandScale , ArmScale  * 27.319,  ArmScale * -30.326 + HandScale * -15]) 
+            cube([HandScale  * 10.3, HandScale  * 20, HandScale *7]);
         
-            translate([ForeArmCircumferenceScale  * 47.228 - (2*40.186125+2) *HandScale, ArmScale  * 27.319,  ArmScale * -30.326 + HandScale * -15 ]) 
-            cube([HandScale  * 4, HandScale  * 20, HandScale *7]);
+            translate([ForeArmCircumferenceScale  * 47.228 - (2*38+7-13*71/93) *HandScale, ArmScale  * 27.319,  ArmScale * -30.326 + HandScale * -15 ]) 
+            cube([HandScale  * 4.3, HandScale  * 20, HandScale *7]);
         
-            translate([ForeArmCircumferenceScale  * 47.228 - (3*40.186125 +2) *HandScale, ArmScale  * 27.319, ArmScale * -30.326 + HandScale * -15]) 
-            cube([HandScale  * 4, HandScale  * 20, HandScale *7]);
+            translate([ForeArmCircumferenceScale  * 47.228 - (3*38 +7+30*71/93) *HandScale, ArmScale  * 27.319, ArmScale * -30.326 + HandScale * -15]) 
+            cube([HandScale  * 4.3, HandScale  * 20, HandScale *7]);
             
             //cut the arm to fit around the wrist
-            translate([ForeArmCircumferenceScale  * 62.989 - 160.7445 *HandScale -  200, ArmScale  * 27.319, HandScale  * -42.6 -50]) 
+            translate([ForeArmCircumferenceScale  * 47.228 - (167.8+150) *HandScale, ArmScale  * 27.319, ArmScale * -60 + HandScale * -15]) 
             cube([ 200, 20, 200]);
+            echo(HandScale);
             
         }
         
@@ -930,7 +931,8 @@ module Gripper() {
 module GripperAttach() {
     rotate([0, 90, 0]) 
     translate([-65 * HandScale, 0, 0])
-    scale(HandScale * 1.09803973) 
+    rotate([180, 0, 0]) 
+    scale(HandScale * 0.8658428987) 
     import("o_GripperAttach.stl", convexity=3);
 }
 module ThumbOuter() { 
