@@ -493,9 +493,9 @@ module MakeArm(PieceNumber) {
             cube([HandScale  * 4.3, HandScale  * 20, HandScale *7]);
             
             //cut the arm to fit around the wrist
-            translate([ForeArmCircumferenceScale  * 47.228 - (161) *HandScale-200, ArmScale  * 27.319, ArmScale * -60 + HandScale * -15]) 
+            translate([ForeArmCircumferenceScale  * 47.228 - (161-19.8) *HandScale-219.8
+          , ArmScale  * 27.319, ArmScale * -60 + HandScale * -15]) 
             cube([ 200, 20, 200]);
-            echo(HandScale);
         }
         
     }
