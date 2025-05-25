@@ -478,7 +478,6 @@ module MakeArm(PieceNumber) {
               //Make hole for grip latch hinge
               translate([33.95* ForeArmCircumferenceScale, 38.83 * ArmScale, -(242.76* ArmScale)]) rotate([-90,0,0]) LatchHole();
           }
-          
         if(PieceNumber ==1)  {
             //make guide holes
             translate([ForeArmCircumferenceScale  * 47.228 - 2 *HandScale, ArmScale  * 27.319, ArmScale * -30.326 + HandScale * -15 ]) 
@@ -487,17 +486,16 @@ module MakeArm(PieceNumber) {
             translate([ForeArmCircumferenceScale  * 47.228 - (38+7) *HandScale , ArmScale  * 27.319,  ArmScale * -30.326 + HandScale * -15]) 
             cube([HandScale  * 10.3, HandScale  * 20, HandScale *7]);
         
-            translate([ForeArmCircumferenceScale  * 47.228 - (2*38+7-13*71/93) *HandScale, ArmScale  * 27.319,  ArmScale * -30.326 + HandScale * -15 ]) 
+            translate([ForeArmCircumferenceScale  * 47.228 - (2*38+7-13*71/93+2) *HandScale, ArmScale  * 27.319,  ArmScale * -30.326 + HandScale * -15 ]) 
             cube([HandScale  * 4.3, HandScale  * 20, HandScale *7]);
         
-            translate([ForeArmCircumferenceScale  * 47.228 - (3*38 +7+30*71/93) *HandScale, ArmScale  * 27.319, ArmScale * -30.326 + HandScale * -15]) 
+            translate([ForeArmCircumferenceScale  * 47.228 - (3*38 +7+30*71/91-3) *HandScale, ArmScale  * 27.319, ArmScale * -30.326 + HandScale * -15]) 
             cube([HandScale  * 4.3, HandScale  * 20, HandScale *7]);
             
             //cut the arm to fit around the wrist
-            translate([ForeArmCircumferenceScale  * 47.228 - (167.8+150) *HandScale, ArmScale  * 27.319, ArmScale * -60 + HandScale * -15]) 
+            translate([ForeArmCircumferenceScale  * 47.228 - (161) *HandScale-200, ArmScale  * 27.319, ArmScale * -60 + HandScale * -15]) 
             cube([ 200, 20, 200]);
             echo(HandScale);
-            
         }
         
     }
