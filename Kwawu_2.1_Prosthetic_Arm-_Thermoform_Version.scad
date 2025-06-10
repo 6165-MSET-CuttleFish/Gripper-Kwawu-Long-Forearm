@@ -489,7 +489,7 @@ module MakeArm(PieceNumber) {
             translate([ForeArmCircumferenceScale  * 47.228 - (2*38+7-13*71/93) *HandScale, ArmScale  * 27.319,  ArmScale * -30.326 + HandScale * -15 ]) 
             cube([HandScale  * 4.3, HandScale  * 20, HandScale *7]);
         
-            translate([ForeArmCircumferenceScale  * 47.228 - (3*38 +7+30*71/91) *HandScale, ArmScale  * 27.319, ArmScale * -30.326 + HandScale * -15]) 
+            translate([ForeArmCircumferenceScale  * 47.228 - (3*38 +7+30*71/91-5.4) *HandScale, ArmScale  * 27.319, ArmScale * -30.326 + HandScale * -15]) 
             cube([HandScale  * 4.3, HandScale  * 20, HandScale *7]);
             
             //cut the arm to fit around the wrist
