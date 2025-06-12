@@ -480,20 +480,20 @@ module MakeArm(PieceNumber) {
           }
         if(PieceNumber ==1)  {
             //make guide holes
-            translate([ForeArmCircumferenceScale  * 47.228 - 2 *HandScale, ArmScale  * 27.319, ArmScale * -30.326 + HandScale * -15 ]) 
-            cube([HandScale  * 4, HandScale  * 20, HandScale *7]);
+            translate([ForeArmCircumferenceScale  * 47.228 - 0 *HandScale, ArmScale  * 27.319, ArmScale * -30.326 + HandScale * -15 ]) 
+            cube([HandScale  * 4.5 + .3, HandScale  * 20, HandScale *7]);
             
             translate([ForeArmCircumferenceScale  * 47.228 - (38+5) *HandScale , ArmScale  * 27.319,  ArmScale * -30.326 + HandScale * -15]) 
-            cube([HandScale  * 10.3, HandScale  * 20, HandScale *7]);
+            cube([HandScale  * 10 + .3, HandScale  * 20, HandScale *7]);
         
-            translate([ForeArmCircumferenceScale  * 47.228 - (2*38+7-13*71/93) *HandScale, ArmScale  * 27.319,  ArmScale * -30.326 + HandScale * -15 ]) 
-            cube([HandScale  * 4.3, HandScale  * 20, HandScale *7]);
+            translate([ForeArmCircumferenceScale  * 47.228 - (2*38+7-13*71/93+1.2) *HandScale, ArmScale  * 27.319,  ArmScale * -30.326 + HandScale * -15 ]) 
+            cube([HandScale  * 5.2 +.3, HandScale  * 20, HandScale *7]);
         
-            translate([ForeArmCircumferenceScale  * 47.228 - (3*38-8) *HandScale, ArmScale  * 27.319, ArmScale * -30.326 + HandScale * -15]) 
-            cube([HandScale  * 4.3, HandScale  * 20, HandScale *7]);
+            translate([ForeArmCircumferenceScale  * 47.228 - (3*38-6+.3) *HandScale, ArmScale  * 27.319, ArmScale * -30.326 + HandScale * -15]) 
+            cube([HandScale  * 4+ .3, HandScale  * 20, HandScale *7]);
             
             //cut the arm to fit around the wrist
-            translate([ForeArmCircumferenceScale  * 62.989 - 136*HandScale -  200, ArmScale  * 27.319, HandScale  * -42.6 -50]) 
+            translate([ForeArmCircumferenceScale  * 62.989 - 140.8*HandScale -  200, ArmScale  * 27.319, HandScale  * -42.6 -50]) 
             cube([ 200, 20, 200]);
         }
     }
