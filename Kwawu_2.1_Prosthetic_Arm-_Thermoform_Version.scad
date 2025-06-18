@@ -480,16 +480,16 @@ module MakeArm(PieceNumber) {
           }
         if(PieceNumber ==1)  {
             //make guide holes
-            translate([ForeArmCircumferenceScale  * 47.228 - 0 *HandScale, ArmScale  * 27.319, ArmScale * -30.326 + HandScale * -15 ]) 
+            translate([ForeArmCircumferenceScale  * 47.228 - (65.5+7) *HandScale, ArmScale  * 27.319, ArmScale * -30.326 + HandScale * -15 ]) 
             cube([HandScale  * 4.5 + .3, HandScale  * 20, HandScale *7]);
             
-            translate([ForeArmCircumferenceScale  * 47.228 - (38+5) *HandScale , ArmScale  * 27.319,  ArmScale * -30.326 + HandScale * -15]) 
+            translate([ForeArmCircumferenceScale  * 47.228 - (38+5+65.5+7) *HandScale , ArmScale  * 27.319,  ArmScale * -30.326 + HandScale * -15]) 
             cube([HandScale  * 10 + .3, HandScale  * 20, HandScale *7]);
         
-            translate([ForeArmCircumferenceScale  * 47.228 - (2*38+7-13*71/93+1.2) *HandScale, ArmScale  * 27.319,  ArmScale * -30.326 + HandScale * -15 ]) 
+            translate([ForeArmCircumferenceScale  * 47.228 - (+7) *HandScale, ArmScale  * 27.319,  ArmScale * -30.326 + HandScale * -15 ]) 
             cube([HandScale  * 5.2 +.3, HandScale  * 20, HandScale *7]);
         
-            translate([ForeArmCircumferenceScale  * 47.228 - (3*38-6+.3) *HandScale, ArmScale  * 27.319, ArmScale * -30.326 + HandScale * -15]) 
+            translate([ForeArmCircumferenceScale  * 47.228 - (0+34.0247311828+7) *HandScale, ArmScale  * 27.319, ArmScale * -30.326 + HandScale * -15]) 
             cube([HandScale  * 4+ .3, HandScale  * 20, HandScale *7]);
             
             //cut the arm to fit around the wrist
@@ -502,11 +502,11 @@ module MakeArm(PieceNumber) {
     if(PieceNumber ==1 && CoverPinDiameter > 0) {
     
         // Make pins for cover
-        translate([ForeArmCircumferenceScale  * 27.228, ArmScale  * 37.319 + ArmScale  * 10, ArmScale  * -39.35 ]) 
+        translate([ForeArmCircumferenceScale  * 27.228 + 5*HandScale, ArmScale  * 37.319 + ArmScale  * 10, ArmScale  * -39.35 ]) 
         rotate([90,0,0])  
         cylinder(d=CoverPinDiameter + 0.5, h = ArmScale  * 12.5, center=false, $fn=30);
     
-        translate([ForeArmCircumferenceScale  * 27.228 - 80.37225*HandScale, ArmScale  * 37.319 + ArmScale  * 10, ArmScale  * -39.35 ]) 
+        translate([ForeArmCircumferenceScale  * 27.228 - (80.37225-32)*HandScale, ArmScale  * 37.319 + ArmScale  * 10, ArmScale  * -39.35 ]) 
         rotate([90,0,0]) 
         cylinder(d=CoverPinDiameter + 0.5, h = ArmScale  * 10, center=false, $fn=30);
         
