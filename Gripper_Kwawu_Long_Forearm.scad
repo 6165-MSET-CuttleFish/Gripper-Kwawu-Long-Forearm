@@ -7,7 +7,7 @@
 // The ISO thread code is by Trevor Moseley
 
 // Preview Each Part
-part = "Cuff"; // [ Cuff:Cuff, Arm1:Arm1, Arm2:Arm2, Arm3:Arm3, Arm4:Arm4, ElbowBolt:ElbowBolt, WhippleTreePrimary:WhippleTreePrimary, WhippleTreeSecondary:WhippleTreeSecondary, WristCompressionBushing:WristCompressionBushing, Thermoform1:Thermoform1, Thermoform2:Thermoform2, Thermoform3:Thermoform3, Cover1:Cover1, Cover2:Cover2, Cover3:Cover3, Cover4:Cover4, GripperHand: GripperHand, ThumbMoldOuter:ThumbMoldOuter, ThumbMoldInner:ThumbMoldInner, ThumbReg:ThumbReg]
+part = "Cuff"; // [ Cuff:Cuff, Arm1:Arm1, Arm2:Arm2, Arm3:Arm3, Arm4:Arm4, ElbowBolt:ElbowBolt, Thermoform1:Thermoform1, Thermoform2:Thermoform2, Thermoform3:Thermoform3, Cover1:Cover1, Cover2:Cover2, Cover3:Cover3, Cover4:Cover4, GripperHand: GripperHand, ThumbMoldOuter:ThumbMoldOuter, ThumbMoldInner:ThumbMoldInner, ThumbReg:ThumbReg]
 
 // Choose Left or Right Hand
 LeftRight = "Left"; // [Left,Right]
@@ -29,10 +29,6 @@ CoverPieces = 2; //[1, 2, 4]
 CoverPinDiameter = 8;//[0, 4, 6, 8, 10]
 // ISO metric bolt holding cuff and arm together (mm)
 ElbowBoltDiameter = 8; //[4, 6, 8, 10, 12, 14]
-// ISO metric bolt for adjusting tensioner (mm)
-TensionerBoltDiameter = 3; //[2, 3, 4]
-// Include Grip Latch
-GripLatch = "Yes"; // [Yes,No]
 
 /* [Hidden] */
 
@@ -201,51 +197,6 @@ module print_part( ) {
         }
     } 
     
-    if(part == "WhippleTreePrimary") { 
-         if (LeftRight == "Left") {
-            mirror([1,0,0]) WhippleTreePrimary();
-           } else {
-            WhippleTreePrimary();
-        }
-    }
-    
-    if(part == "WhippleTreeSecondary") { 
-         if (LeftRight == "Left") {
-            mirror([1,0,0]) WhippleTreeSecondary();
-           } else {
-            WhippleTreeSecondary();
-        }
-    }
-    
-       if(part == "LatchSlider") { 
-           if(GripLatch == "Yes") {
-             if (LeftRight == "Left") {
-                mirror([1,0,0]) LatchSlider();
-               } else {
-                LatchSlider();
-            }
-        }
-    }
-    
-       if(part == "LatchPin") { 
-           if(GripLatch == "Yes") {
-             if (LeftRight == "Left") {
-                mirror([1,0,0]) LatchPin();
-               } else {
-                LatchPin();
-            }
-        }
-    }
-    
-       if(part == "LatchTeeth") { 
-          if(GripLatch == "Yes") {
-             if (LeftRight == "Left") {
-                mirror([1,0,0]) LatchTeeth();
-               } else {
-                LatchTeeth();
-            }
-        }
-    }
     
         
     if(part == "WristBolt") { 
@@ -474,11 +425,7 @@ module MakeArm(PieceNumber) {
         
         translate([ForeArmCircumferenceScale  * -74.64, ArmScale  * 40.819, ArmScale  * -324.376 ]) rotate([90,0,0]) cylinder(d=ElbowBoltDiameter, h=ArmScale * 200,center=true, $fn=20);
             
-        if(GripLatch == "Yes")
-          {
-              //Make hole for grip latch hinge
-              translate([33.95* ForeArmCircumferenceScale, 38.83 * ArmScale, -(242.76* ArmScale)]) rotate([-90,0,0]) LatchHole();
-          }
+        
         if(PieceNumber ==1)  {
             
             //make guide holes
@@ -539,10 +486,6 @@ module MakeArm(PieceNumber) {
            translate([ForeArmCircumferenceScale  * 60.36, ArmScale  * 40.819, ArmScale  * -324.376 ]) rotate([90,0,0]) translate([0, 0, ArmScale * 11]) cylinder(d=ElbowBoltDiameter + 0.5, h=ArmScale * 10,center=true, $fn=20);
        }
 
-        if(GripLatch == "Yes")
-        {
-            translate([33.95* ForeArmCircumferenceScale, 38.83 * ArmScale, -(242.76* ArmScale)]) rotate([-90,0,0])  LatchBase();
-        }
     }
     
     
