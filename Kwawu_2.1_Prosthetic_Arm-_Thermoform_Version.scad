@@ -26,7 +26,7 @@ ArmPieces = 2; //[1, 2, 4]
 // How many pieces to divide the cover into 
 CoverPieces = 2; //[1, 2, 4]
 // Diameter of pin holding cover on (mm)
-CoverPinDiameter = 0;//[0, 4, 6, 8, 10]
+CoverPinDiameter = 8;//[0, 4, 6, 8, 10]
 // ISO metric bolt holding cuff and arm together (mm)
 ElbowBoltDiameter = 8; //[4, 6, 8, 10, 12, 14]
 // ISO metric bolt for adjusting tensioner (mm)
@@ -506,11 +506,11 @@ module MakeArm(PieceNumber) {
         // Make pins for cover
         translate([ForeArmCircumferenceScale  * 27.228 + (13.5-offset)*HandScale, ArmScale  * 37.319 + ArmScale  * 10, ArmScale  * -39.35 ]) 
         rotate([90,0,0])  
-        cylinder(d=CoverPinDiameter + 0.5, h = ArmScale  * 12.5, center=false, $fn=30);
+        cylinder(d=CoverPinDiameter, h = ArmScale  * 12.5, center=false, $fn=30);
     
         translate([ForeArmCircumferenceScale  * 27.228 - (80.37225-32+5+offset)*HandScale, ArmScale  * 37.319 + ArmScale  * 10, ArmScale  * -39.35 ]) 
         rotate([90,0,0]) 
-        cylinder(d=CoverPinDiameter + 0.5, h = ArmScale  * 10, center=false, $fn=30);
+        cylinder(d=CoverPinDiameter, h = ArmScale  * 10, center=false, $fn=30);
         
     }   
     
