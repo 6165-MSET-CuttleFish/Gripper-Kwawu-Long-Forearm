@@ -454,7 +454,7 @@ module MakeArm(PieceNumber) {
         rotate([90,0,0])  
         cylinder(d=CoverPinDiameter, h = ArmScale  * 12.5, center=false, $fn=30);
     
-        translate([ForeArmCircumferenceScale  * 27.228 - (80.37225-32+5+2+offset-65)*HandScale, ArmScale  * 37.319 + ArmScale  * 10, ArmScale  * -39.35 ]) 
+        translate([ForeArmCircumferenceScale  * 27.228 - (80.37225-32+5+2+offset-65-4)*HandScale, ArmScale  * 37.319 + ArmScale  * 10, ArmScale  * -39.35 ]) 
         rotate([90,0,0]) 
         cylinder(d=CoverPinDiameter, h = ArmScale  * 10, center=false, $fn=30);
         
