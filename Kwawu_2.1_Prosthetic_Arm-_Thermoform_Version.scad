@@ -389,7 +389,7 @@ module MakeWristBolt() {
 }
 
 module MakeArm(PieceNumber) {
-    offset = 3; // move over all the holes and pins on the arm1
+    offset = 67; // move over all the holes and pins on the arm1
     
     difference(){
         
@@ -434,10 +434,10 @@ module MakeArm(PieceNumber) {
             translate([ForeArmCircumferenceScale  * 47.228 - (38+5+offset) *HandScale , ArmScale  * 27.319,  ArmScale * -30.326 + HandScale * -15]) 
             cube([HandScale  * 10 + .3, HandScale  * 20, HandScale *7]);
         
-            translate([ForeArmCircumferenceScale  * 47.228 - (78+7.5+offset) *HandScale, ArmScale  * 27.319,  ArmScale * -30.326 + HandScale * -15 ]) 
+            translate([ForeArmCircumferenceScale  * 47.228 - (78+7.5+offset-140.8) *HandScale, ArmScale  * 27.319,  ArmScale * -30.326 + HandScale * -15 ]) 
             cube([HandScale  * 4 +.3, HandScale  * 20, HandScale *7]);
         
-            translate([ForeArmCircumferenceScale  * 47.228 - (108+3-1+offset) *HandScale, ArmScale  * 27.319, ArmScale * -30.326 + HandScale * -15]) 
+            translate([ForeArmCircumferenceScale  * 47.228 - (108+3-1+offset-140.8) *HandScale, ArmScale  * 27.319, ArmScale * -30.326 + HandScale * -15]) 
             cube([HandScale  * 4+ .3, HandScale  * 20, HandScale *7]);
             
             //cut the arm to fit around the wrist
@@ -450,11 +450,11 @@ module MakeArm(PieceNumber) {
     if(PieceNumber ==1 && CoverPinDiameter > 0) {
     
         // Make pins for cover
-        translate([ForeArmCircumferenceScale  * 27.228 + (13.5-offset)*HandScale, ArmScale  * 37.319 + ArmScale  * 10, ArmScale  * -39.35 ]) 
+        translate([ForeArmCircumferenceScale  * 27.228 + (13.5+6-offset+65)*HandScale, ArmScale  * 37.319 + ArmScale  * 10, ArmScale  * -39.35 ]) 
         rotate([90,0,0])  
         cylinder(d=CoverPinDiameter, h = ArmScale  * 12.5, center=false, $fn=30);
     
-        translate([ForeArmCircumferenceScale  * 27.228 - (80.37225-32+5+offset)*HandScale, ArmScale  * 37.319 + ArmScale  * 10, ArmScale  * -39.35 ]) 
+        translate([ForeArmCircumferenceScale  * 27.228 - (80.37225-32+5+2+offset-65)*HandScale, ArmScale  * 37.319 + ArmScale  * 10, ArmScale  * -39.35 ]) 
         rotate([90,0,0]) 
         cylinder(d=CoverPinDiameter, h = ArmScale  * 10, center=false, $fn=30);
         
