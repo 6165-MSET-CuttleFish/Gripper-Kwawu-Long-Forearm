@@ -389,7 +389,7 @@ module MakeWristBolt() {
 }
 
 module MakeArm(PieceNumber) {
-    offset = 67; // move over all the holes and pins on the arm1
+    offset = 63; // move over all the holes and pins on the arm1
     
     difference(){
         
