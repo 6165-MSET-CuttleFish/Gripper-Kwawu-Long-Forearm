@@ -31,6 +31,8 @@ PaddingThickness = 2; //[0: 10]
 ArmPieces = 2; //[1, 2, 4]
 // How many pieces to divide the cover into 
 CoverPieces = 2; //[1, 2, 4]
+// Use automatic sizing for ElbowBolt
+AutoElbowBoltDiameter = true; //[true, false]
 // Diameter of pin holding cover on (mm)
 CoverPinDiameter = 8;//[0, 4, 6, 8, 10]
 // ISO metric bolt holding cuff and arm together (mm)
@@ -64,6 +66,7 @@ module print_part( ) {
     
     if(part == "ElbowBolt") {
         // ( dia,hi, headhi, headDiameter, hexDiameter)
+        ElbowBoltDiameter = (AutoElbowBoltDiameter ? CuffScale * 9 : ElbowBoltDiameter);
         make_bolt(ElbowBoltDiameter, ArmScale * 6 + CuffScale * 10, ElbowBoltDiameter/2, ElbowBoltDiameter *3);
     }
     
@@ -342,6 +345,7 @@ module MakeWristCompressionBushing() {
 }
 
 module MakeCuff() {
+    ElbowBoltDiameter = AutoElbowBoltDiameter? CuffScale * 9 : ElbowBoltDiameter;
     
     difference() {
         Cuff();
@@ -395,6 +399,7 @@ module MakeWristBolt() {
 }
 
 module MakeArm(PieceNumber) {
+    ElbowBoltDiameter = AutoElbowBoltDiameter? CuffScale * 9 : ElbowBoltDiameter;
     offset = 63; // move over all the holes and pins on the arm1
     
     difference(){
