@@ -344,8 +344,7 @@ module MakeCuff() {
         translate([CuffScale  * 58.65, CuffScale  * -157, 0 ]) cylinder(d=ElbowBoltDiameter + 1, h = CuffScale  * 150, center=true, $fn=30);
         translate([CuffScale  * 58.65, CuffScale  * -303.63, 0 ]) cylinder(d=ElbowBoltDiameter + 1, h = CuffScale  * 150, center=true, $fn=30);
         
-        //Cut a hole for tensioner bolts
-        translate([CuffScale  * 172.85, CuffScale  * -293.798, CuffScale  * 6.25 ]) rotate([0,90,0])  cylinder(d=TensionerBoltDiameter + 0.5, h = CuffScale  * 50, center=true, $fn=30);
+        
     }
     
    
@@ -390,7 +389,7 @@ module MakeWristBolt() {
 }
 
 module MakeArm(PieceNumber) {
-    offset = 4; // move over all the holes and pins on the arm1
+    offset = 63; // move over all the holes and pins on the arm1
     
     difference(){
         
@@ -435,10 +434,10 @@ module MakeArm(PieceNumber) {
             translate([ForeArmCircumferenceScale  * 47.228 - (38+5+offset) *HandScale , ArmScale  * 27.319,  ArmScale * -30.326 + HandScale * -15]) 
             cube([HandScale  * 10 + .3, HandScale  * 20, HandScale *7]);
         
-            translate([ForeArmCircumferenceScale  * 47.228 - (78+7.5+offset) *HandScale, ArmScale  * 27.319,  ArmScale * -30.326 + HandScale * -15 ]) 
+            translate([ForeArmCircumferenceScale  * 47.228 - (78+7.5+offset-140.8) *HandScale, ArmScale  * 27.319,  ArmScale * -30.326 + HandScale * -15 ]) 
             cube([HandScale  * 4 +.3, HandScale  * 20, HandScale *7]);
         
-            translate([ForeArmCircumferenceScale  * 47.228 - (108+3-1+offset) *HandScale, ArmScale  * 27.319, ArmScale * -30.326 + HandScale * -15]) 
+            translate([ForeArmCircumferenceScale  * 47.228 - (108+3-1+offset-140.8) *HandScale, ArmScale  * 27.319, ArmScale * -30.326 + HandScale * -15]) 
             cube([HandScale  * 4+ .3, HandScale  * 20, HandScale *7]);
             
             //cut the arm to fit around the wrist
@@ -451,11 +450,11 @@ module MakeArm(PieceNumber) {
     if(PieceNumber ==1 && CoverPinDiameter > 0) {
     
         // Make pins for cover
-        translate([ForeArmCircumferenceScale  * 27.228 + (13.5-offset)*HandScale, ArmScale  * 37.319 + ArmScale  * 10, ArmScale  * -39.35 ]) 
+        translate([ForeArmCircumferenceScale  * 27.228 + (13.5+6-offset+65-1)*HandScale, ArmScale  * 37.319 + ArmScale  * 10, ArmScale  * -39.35 ]) 
         rotate([90,0,0])  
         cylinder(d=CoverPinDiameter, h = ArmScale  * 12.5, center=false, $fn=30);
     
-        translate([ForeArmCircumferenceScale  * 27.228 - (80.37225-32+5+offset)*HandScale, ArmScale  * 37.319 + ArmScale  * 10, ArmScale  * -39.35 ]) 
+        translate([ForeArmCircumferenceScale  * 27.228 - (80.37225-32+5+2+offset-65-2.5)*HandScale, ArmScale  * 37.319 + ArmScale  * 10, ArmScale  * -39.35 ]) 
         rotate([90,0,0]) 
         cylinder(d=CoverPinDiameter, h = ArmScale  * 10, center=false, $fn=30);
         
@@ -535,24 +534,11 @@ module MakeThermoform1() {
     
    difference(){
         Thermoform1();
-        // cut large hole for wrist bolt 
-       // the -0.05 on bolt diamter is to make sure threads attach to walls
-        translate([251.379 * ForeArmCircumferenceScale, 15.135 * ForeArmCircumferenceScale, -(61.5* ArmScale) + (26* HandScale)/2 ]) 
-        cylinder(d = WristBoltDia - 0.05, h = 67.00 * ArmScale, center=true, $fn=30);
+        
                 
     }
     
-    difference(){
-        
-        //Add inner threads for wrist bolt holder
-        translate([251.379 * ForeArmCircumferenceScale, 15.135 * ForeArmCircumferenceScale, -(20 * HandScale + 40 * ArmScale) +(-3* HandScale) ])  
-        thread_in(WristBoltDia, 23 * HandScale + 40 * ArmScale);
-      
-        // truncate threads length to wrist end
-        translate([251.379 * ForeArmCircumferenceScale - 100, 15.135 * ForeArmCircumferenceScale - 100, -(38* ArmScale)-0.5])
-        cube(200);
-        
-    }
+    
         
 }
 
