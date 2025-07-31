@@ -400,7 +400,7 @@ module MakeWristBolt() {
 
 module MakeArm(PieceNumber) {
     ElbowBoltDiameter = AutoElbowBoltDiameter? CuffScale * 9 : ElbowBoltDiameter;
-    offset = 63; // move over all the holes and pins on the arm1
+    offset = 37; // move over all the holes and pins on the arm1
     
     difference(){
         
