@@ -1,5 +1,7 @@
-// Version: 1.0.1
-// Updated 7/30/25
+/* Metal Elbow Bolts */
+
+// Version: 1.1.0
+// Updated 8/10/25
 
 // Modified by Eric Woo-Shem for Gripper hand
 // Using Gripper design by Skip Meetze and Jon Schull & Modifications by James Quilty (Thai_Reach)
@@ -32,11 +34,12 @@ ArmPieces = 2; //[1, 2, 4]
 // How many pieces to divide the cover into 
 CoverPieces = 2; //[1, 2, 4]
 // Use automatic sizing for ElbowBolt
-AutoElbowBoltDiameter = true; //[true, false]
+AutoElbowBoltDiameter = false; //[true, false]
 // Diameter of pin holding cover on (mm)
 CoverPinDiameter = 8;//[0, 4, 6, 8, 10]
 // ISO metric bolt holding cuff and arm together (mm)
-ElbowBoltDiameter = 8; //[4, 6, 8, 10, 12, 14]
+ElbowBoltDiameter = 5; //[4, 6, 8, 10, 12, 14]
+ElbowBoltExtraDiameter = 0.5;
 
 /* [Hidden] */
 
@@ -351,8 +354,8 @@ module MakeCuff() {
         Cuff();
         
         //Cut a holes for elbow bolts
-        translate([CuffScale  * 58.65, CuffScale  * -157, 0 ]) cylinder(d=ElbowBoltDiameter + 1, h = CuffScale  * 150, center=true, $fn=30);
-        translate([CuffScale  * 58.65, CuffScale  * -303.63, 0 ]) cylinder(d=ElbowBoltDiameter + 1, h = CuffScale  * 150, center=true, $fn=30);
+        translate([CuffScale  * 58.65, CuffScale  * -157, 0 ]) cylinder(d=ElbowBoltDiameter + ElbowBoltExtraDiameter, h = CuffScale  * 150, center=true, $fn=30);
+        translate([CuffScale  * 58.65, CuffScale  * -303.63, 0 ]) cylinder(d=ElbowBoltDiameter + ElbowBoltExtraDiameter, h = CuffScale  * 150, center=true, $fn=30);
         
         
     }
@@ -431,9 +434,9 @@ module MakeArm(PieceNumber) {
         }
               
          // Make hole for Elbow threads
-        translate([ForeArmCircumferenceScale  * 60.36, ArmScale  * 40.819, ArmScale  * -324.376 ]) rotate([90,0,0]) cylinder(d=ElbowBoltDiameter, h=ArmScale * 200,center=true, $fn=20);
+        translate([ForeArmCircumferenceScale  * 60.36, ArmScale  * 40.819, ArmScale  * -324.376 ]) rotate([90,0,0]) cylinder(d=ElbowBoltDiameter+ElbowBoltExtraDiameter, h=ArmScale * 200,center=true, $fn=20);
         
-        translate([ForeArmCircumferenceScale  * -74.64, ArmScale  * 40.819, ArmScale  * -324.376 ]) rotate([90,0,0]) cylinder(d=ElbowBoltDiameter, h=ArmScale * 200,center=true, $fn=20);
+        translate([ForeArmCircumferenceScale  * -74.64, ArmScale  * 40.819, ArmScale  * -324.376 ]) rotate([90,0,0]) cylinder(d=ElbowBoltDiameter+ElbowBoltExtraDiameter, h=ArmScale * 200,center=true, $fn=20);
             
         
         if(PieceNumber ==1)  {
@@ -476,24 +479,13 @@ module MakeArm(PieceNumber) {
        
         difference() {
 
-            //Add inner threads for elbow bolt holder
-            translate([ForeArmCircumferenceScale  * -74.64, ArmScale  * 40.819, ArmScale  * -324.376 ]) rotate([90,0,0]) translate([0, 0, -2 * ArmScale  ])thread_in(ElbowBoltDiameter, ArmScale * 10);
-                    
-            translate([ForeArmCircumferenceScale  * -74.64, ArmScale  * 40.819, ArmScale  * -324.376 ]) rotate([90,0,0]) translate([0, 0, ArmScale * -5]) cylinder(d=ElbowBoltDiameter + 0.5, h=ArmScale * 10,center=true, $fn=20);
-           
-           translate([ForeArmCircumferenceScale  * -74.64, ArmScale  * 40.819, ArmScale  * -324.376 ]) rotate([90,0,0]) translate([0, 0, ArmScale * 11]) cylinder(d=ElbowBoltDiameter + 0.5, h=ArmScale * 10,center=true, $fn=20);
         }
     }
           
    if((ArmPieces == 4 && PieceNumber == 4) || (ArmPieces == 2 && PieceNumber == 2) || ArmPieces == 1) {
        
        difference() {
-            //Add inner threads for elbow bolt holder
-            translate([ForeArmCircumferenceScale  * 60.36, ArmScale  * 40.819, ArmScale  * -324.376 ]) rotate([90,0,0]) translate([0, 0, -2 * ArmScale  ])thread_in(ElbowBoltDiameter, ArmScale * 10);
-                    
-            translate([ForeArmCircumferenceScale  * 60.36, ArmScale  * 40.819, ArmScale  * -324.376 ]) rotate([90,0,0]) translate([0, 0, ArmScale * -5]) cylinder(d=ElbowBoltDiameter + 0.5, h=ArmScale * 10,center=true, $fn=20);
-           
-           translate([ForeArmCircumferenceScale  * 60.36, ArmScale  * 40.819, ArmScale  * -324.376 ]) rotate([90,0,0]) translate([0, 0, ArmScale * 11]) cylinder(d=ElbowBoltDiameter + 0.5, h=ArmScale * 10,center=true, $fn=20);
+            
        }
 
     }
